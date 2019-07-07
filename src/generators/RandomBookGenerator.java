@@ -4,10 +4,10 @@ import entity.Book;
 
 import java.util.Random;
 
-public class BookGenerator {
+public class RandomBookGenerator {
     private Random random;
 
-    public BookGenerator() {
+    public RandomBookGenerator() {
         random = new Random();
     }
 

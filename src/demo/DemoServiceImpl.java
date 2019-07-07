@@ -1,23 +1,21 @@
 package demo;
 
 import entity.Book;
-import generators.BookGenerator;
-import generators.PositionGenerator;
+import generators.RandomBookGenerator;
+import generators.RandomPositionGenerator;
 import repository.Library;
 import services.LibraryService;
 import services.LibraryServiceImpl;
 
-import java.util.Arrays;
-
 public class DemoServiceImpl implements DemoService {
     private LibraryService libraryService;
     private Library library;
-    private PositionGenerator positionGenerator;
+    private RandomPositionGenerator randomPositionGenerator;
 
     public DemoServiceImpl() {
         libraryService = new LibraryServiceImpl();
         library = new Library();
-        positionGenerator = new PositionGenerator();
+        randomPositionGenerator = new RandomPositionGenerator();
     }
 
     @Override
@@ -34,9 +32,9 @@ public class DemoServiceImpl implements DemoService {
     private void addBooksDemo() {
         int size = libraryService.getSize(library);
         int overSize = size + 5; // to show unsuccessful adding books
-        BookGenerator bookGenerator = new BookGenerator();
+        RandomBookGenerator randomBookGenerator = new RandomBookGenerator();
         for (int i = 0; i < overSize; i++) {
-            Book book = bookGenerator.generate();
+            Book book = randomBookGenerator.generate();
             int result = libraryService.addBook(book, library);
             if (result >= 0) {
                 System.out.println(book + " was put on the position " + result);
@@ -48,10 +46,10 @@ public class DemoServiceImpl implements DemoService {
     }
 
     private void addBooksAfterRemove(int amount) {
-        BookGenerator bookGenerator = new BookGenerator();
+        RandomBookGenerator randomBookGenerator = new RandomBookGenerator();
         System.out.println("------ Adding books after removing procedure ------");
         for (int i = 0; i < amount; i++) {
-            Book book = bookGenerator.generate();
+            Book book = randomBookGenerator.generate();
             int result = libraryService.addBook(book, library);
             if (result >= 0) {
                 System.out.println(book + " was put on the position " + result);
@@ -67,7 +65,7 @@ public class DemoServiceImpl implements DemoService {
         int count = 0;
         System.out.println("------ Remove result ------");
         while (count < amount) {
-            int position = positionGenerator.generate(bound);
+            int position = randomPositionGenerator.generate(bound);
             boolean result = libraryService.remove(position, library);
             if (result) {
                 System.out.println("Book on the position " + position + " removed");
@@ -84,7 +82,7 @@ public class DemoServiceImpl implements DemoService {
         int count = 0;
         System.out.println("------ Search result ------");
         while (count < amount) {
-            int position = positionGenerator.generate(bound);
+            int position = randomPositionGenerator.generate(bound);
             Book book = libraryService.search(position, library);
             if (book != null) {
                 System.out.println("Position " + position + ": " + book);

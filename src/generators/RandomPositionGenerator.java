@@ -2,7 +2,7 @@ package generators;
 
 import java.util.Random;
 
-public class PositionGenerator {
+public class RandomPositionGenerator {
     private Random random = new Random();
 
     public int generate(int bound) {
