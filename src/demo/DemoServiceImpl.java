@@ -10,11 +10,13 @@ import services.LibraryServiceImpl;
 public class DemoServiceImpl implements DemoService {
     private LibraryService libraryService;
     private Library library;
+    private RandomBookGenerator randomBookGenerator;
     private RandomPositionGenerator randomPositionGenerator;
 
     public DemoServiceImpl() {
         libraryService = new LibraryServiceImpl();
         library = new Library();
+        randomBookGenerator = new RandomBookGenerator();
         randomPositionGenerator = new RandomPositionGenerator();
     }
 
@@ -32,7 +34,6 @@ public class DemoServiceImpl implements DemoService {
     private void addBooksDemo() {
         int size = libraryService.getSize(library);
         int overSize = size + 5; // to show unsuccessful adding books
-        RandomBookGenerator randomBookGenerator = new RandomBookGenerator();
         for (int i = 0; i < overSize; i++) {
             Book book = randomBookGenerator.generate();
             int result = libraryService.addBook(book, library);
@@ -46,7 +47,6 @@ public class DemoServiceImpl implements DemoService {
     }
 
     private void addBooksAfterRemove(int amount) {
-        RandomBookGenerator randomBookGenerator = new RandomBookGenerator();
         System.out.println("------ Adding books after removing procedure ------");
         for (int i = 0; i < amount; i++) {
             Book book = randomBookGenerator.generate();
