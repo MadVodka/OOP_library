@@ -5,11 +5,7 @@ import entity.Book;
 import java.util.Random;
 
 public class RandomBookGenerator {
-    private Random random;
-
-    public RandomBookGenerator() {
-        random = new Random();
-    }
+    private Random random = new Random();
 
     private static final String[] authors = {
             "Aurora Olden",
